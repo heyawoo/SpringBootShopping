@@ -1,5 +1,5 @@
 package com.example.domain;
 
-public class Item {
+public class Product {
 
 }
