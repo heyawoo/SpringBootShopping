@@ -26,6 +26,7 @@ CREATE TABLE shop_product(
 	stock_quantity INT NOT NULL,
 	image1 VARCHAR(255),
 	image2 VARCHAR(255),
+	detail TEXT,
 	inp_date DATE NOT NULL,
 	upd_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
 	FOREIGN KEY(category_id) references shop_category(id)
@@ -65,19 +66,20 @@ INSERT INTO shop_category VALUES(0, 'orange');
 INSERT INTO shop_category VALUES(0, 'black');
 INSERT INTO shop_category VALUES(0, 'white');
 INSERT INTO shop_category VALUES(0, 'pink');
-INSERT INTO shop_category VALUES(0, 'gliter');
+INSERT INTO shop_category VALUES(0, 'glitter');
 INSERT INTO shop_category VALUES(0, 'colorful');
 -- shop_product
-INSERT INTO shop_product VALUES(0, 1, 'rose', 100, 1, 'rose_img1', 'rose_img2', CURDATE(), CURRENT_TIMESTAMP());
-INSERT INTO shop_product VALUES(0, 2, 'leaf', 5, 10, 'leaf_img1', 'leaf_img2', CURDATE(), CURRENT_TIMESTAMP());
-INSERT INTO shop_product VALUES(0, 10, 'earth', 100000000, 1, 'earth_img1', 'earth_img2', CURDATE(), CURRENT_TIMESTAMP());
-INSERT INTO shop_product VALUES(0, 8, 'rolly pop', 120, 15, 'rollypop_img1', 'rollypop_img2', CURDATE(), CURRENT_TIMESTAMP());
-INSERT INTO shop_product VALUES(0, 9, 'gold bar', 10000, 3, 'goldbar_img1', 'goldbar_img2', CURDATE(), CURRENT_TIMESTAMP());
-INSERT INTO shop_product VALUES(0, 4, 'lemon', 30, 14, 'lemon_img1', 'lemon_img2', CURDATE(), CURRENT_TIMESTAMP());
-INSERT INTO shop_product VALUES(0, 10, 'umbrella', 1000, 6, 'umbrella_img1', 'umbrella_img2', CURDATE(), CURRENT_TIMESTAMP());
-INSERT INTO shop_product VALUES(0, 5, 'orange', 150, 4, 'orange_img1', 'orange_img2', CURDATE(), CURRENT_TIMESTAMP());
-INSERT INTO shop_product VALUES(0, 3, 'cup of water', 100, 50, 'water_img1', 'water_img2', CURDATE(), CURRENT_TIMESTAMP());
-INSERT INTO shop_product VALUES(0, 6, 'chocolate', 500, 3, 'chocolate_img1', 'chocolate_img2', CURDATE(), CURRENT_TIMESTAMP());
+INSERT INTO shop_product VALUES(0, 1, 'apple', 100, 10, 'apple1', 'apple2', 'explain', CURDATE(), CURRENT_TIMESTAMP());
+INSERT INTO shop_product VALUES(0, 2, 'leaves', 5, 10, 'leaves1', 'leaves2', 'explain', CURDATE(), CURRENT_TIMESTAMP());
+INSERT INTO shop_product VALUES(0, 10, 'pizza', 1500, 15, 'pizza1', 'pizza2', 'explain', CURDATE(), CURRENT_TIMESTAMP());
+INSERT INTO shop_product VALUES(0, 8, 'ballons', 120, 3, 'ballons1', 'ballons2', 'explain', CURDATE(), CURRENT_TIMESTAMP());
+INSERT INTO shop_product VALUES(0, 9, 'money', 10000, 3, 'money1', 'money2', 'explain', CURDATE(), CURRENT_TIMESTAMP());
+INSERT INTO shop_product VALUES(0, 4, 'wine', 1900, 4, 'wine1', 'wine2', 'explain', CURDATE(), CURRENT_TIMESTAMP());
+INSERT INTO shop_product VALUES(0, 10, 'vegetables', 1000, 6, 'vegetables1', 'vegetables2', 'explain', CURDATE(), CURRENT_TIMESTAMP());
+INSERT INTO shop_product VALUES(0, 5, 'orange', 150, 9, 'orange1', 'orange2', 'explain', CURDATE(), CURRENT_TIMESTAMP());
+INSERT INTO shop_product VALUES(0, 3, 'aqua', 100, 50, 'aqua1', 'aqua2', 'explain', CURDATE(), CURRENT_TIMESTAMP());
+INSERT INTO shop_product VALUES(0, 6, 'cola', 500, 8, 'cola1', 'cola2', 'explain', CURDATE(), CURRENT_TIMESTAMP());
+INSERT INTO shop_product VALUES(0, 7, 'mac', 100000, 2, 'mac1', 'mac2', 'explain', CURDATE(), CURRENT_TIMESTAMP());
 
 -- shop_order
 INSERT INTO shop_order VALUES(0, 1, 10240, CURDATE(), CURDATE(), CURRENT_TIMESTAMP());
@@ -115,9 +117,30 @@ SELECT p.*, IFNULL(p.stock_quantity - d.order_quantity, p.stock_quantity) AS ext
 FROM shop_product p 
 LEFT JOIN shop_order_detail d
 ON p.id = d.product_id
-ORDER BY p.inp_date, p.id DESC;
+ORDER BY p.inp_date, p.id DESC
+LIMIT 6;
+
+SELECT p.id, c.name as category, p.name, p.price, IFNULL(p.stock_quantity - d.order_quantity, p.stock_quantity) AS stock_quantity, p.image1, p.image2
+FROM shop_product p
+LEFT JOIN shop_order_detail d
+ON p.id = d.product_id
+JOIN shop_category c
+On p.category_id = c.id
+ORDER BY p.inp_date, p.id DESC
+LIMIT 6;
+
+-- list
+SELECT p.id, c.name as category, p.name, p.price, IFNULL(p.stock_quantity - d.order_quantity, p.stock_quantity) AS stock_quantity, p.image1, p.image2
+FROM shop_product p
+LEFT JOIN shop_order_detail d
+ON p.id = d.product_id
+JOIN shop_category c
+On p.category_id = c.id
+WHERE 
 
 
-
+-- paging
+SELECT COUNT(*) totalcount 
+FROM shop_product;
 
 

@@ -4,25 +4,29 @@ public class Product {
 
 	private String id;
 	private String categoryId;
+	private String category;
 	private String name;
 	private int price;
 	private int stockQuantity;
 	private String image1;
 	private String image2;
+	private String detail;
 	
 	public Product() {
 	}
 
-	public Product(String id, String categoryId, String name, int price, int stockQuantity, String image1,
-			String image2) {
+	public Product(String id, String categoryId, String category, String name, int price, int stockQuantity,
+			String image1, String image2, String detail) {
 		super();
 		this.id = id;
 		this.categoryId = categoryId;
+		this.category = category;
 		this.name = name;
 		this.price = price;
 		this.stockQuantity = stockQuantity;
 		this.image1 = image1;
 		this.image2 = image2;
+		this.detail = detail;
 	}
 
 	public String getId() {
@@ -39,6 +43,14 @@ public class Product {
 
 	public void setCategoryId(String categoryId) {
 		this.categoryId = categoryId;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
 	}
 
 	public String getName() {
@@ -81,10 +93,21 @@ public class Product {
 		this.image2 = image2;
 	}
 
+	public String getDetail() {
+		return detail;
+	}
+
+	public void setDetail(String detail) {
+		this.detail = detail;
+	}
+
 	@Override
 	public String toString() {
-		return "Product [id=" + id + ", categoryId=" + categoryId + ", name=" + name + ", price=" + price
-				+ ", stockQuantity=" + stockQuantity + ", image1=" + image1 + ", image2=" + image2 + "]";
+		return "Product [id=" + id + ", categoryId=" + categoryId + ", category=" + category + ", name=" + name
+				+ ", price=" + price + ", stockQuantity=" + stockQuantity + ", image1=" + image1 + ", image2=" + image2
+				+ ", detail=" + detail + "]";
 	}
+
+	
 	
 }
