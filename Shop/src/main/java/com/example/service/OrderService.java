@@ -18,9 +18,13 @@ public class OrderService {
 	@Autowired
 	OrderMapper mapper;
 	
+	// cartに入れている商品のidのマップを利用して商品リストを取得
 	public ArrayList<OrderForm> getPnames(HashMap<String, Integer> map, ArrayList<OrderForm> olist){
+		
+		// productのidの配列
 		String[] keys = map.keySet().toArray(new String[map.size()]);
-	
+		
+		// DBから商品のリスト取得
 		List<Product> list = mapper.getPnames(keys);
 		
 		for (String key : map.keySet()) {
