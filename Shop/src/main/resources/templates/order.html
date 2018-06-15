@@ -20,7 +20,7 @@
 
   <body>
 
-   <!-- Navigation -->
+    <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
         <a class="navbar-brand" th:href="@{/index}">COLOR SHOP</a>
@@ -58,33 +58,23 @@
       </h1>
 
       <!-- Project One -->
-      <div class="row" th:each="o : ${list}">
+      <div class="row">
         <div class="col-md-7">
-          <a th:href="@{/detail(id=${o.pid})}">
-            <img class="card-img-top" th:src="@{${'~/img/'+o.image1+'.jpg'}}" th:alt="${o.pname}">
+          <a href="#">
+            <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/700x300" alt="">
           </a>
         </div>
         <div class="col-md-5">
-          <h3><span th:text="${o.pname}">Project One</span></h3>
+          <h3>Project One</h3>
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium veniam exercitationem expedita laborum at voluptate. Labore, voluptates totam at aut nemo deserunt rem magni pariatur quos perspiciatis atque eveniet unde.</p>
-          <div class="row text-center">
-          	<div class="col"><h6>PRICE</h6></div>
-          	<div class="col"><h6>NUM</h6></div>
-          	<div class="col"><h6>TOTAL</h6></div>
-          </div>
-          <div class="row text-center">
-          	<div class="col"><span th:text="${o.price}"></span></div>
-          	<div class="col"><span th:text="${o.num}"></span></div>
-          	<div class="col"><span th:text="${o.total}"></span></div>
-          </div>
           <a class="btn btn-primary" href="#">View Project</a>
         </div>
       </div>
-      <hr>
       <!-- /.row -->
 
-<!-- 
-      Project Two
+      <hr>
+
+      <!-- Project Two -->
       <div class="row">
         <div class="col-md-7">
           <a href="#">
@@ -97,11 +87,11 @@
           <a class="btn btn-primary" href="#">View Project</a>
         </div>
       </div>
-      /.row
+      <!-- /.row -->
 
       <hr>
 
-      Project Three
+      <!-- Project Three -->
       <div class="row">
         <div class="col-md-7">
           <a href="#">
@@ -114,11 +104,11 @@
           <a class="btn btn-primary" href="#">View Project</a>
         </div>
       </div>
-      /.row
+      <!-- /.row -->
 
       <hr>
 
-      Project Four
+      <!-- Project Four -->
       <div class="row">
 
         <div class="col-md-7">
@@ -132,11 +122,11 @@
           <a class="btn btn-primary" href="#">View Project</a>
         </div>
       </div>
-      /.row
+      <!-- /.row -->
 
       <hr>
 
-  -->     <!-- Pagination -->
+      <!-- Pagination -->
       <ul class="pagination justify-content-center">
         <li class="page-item">
           <a class="page-link" href="#" aria-label="Previous">

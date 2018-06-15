@@ -1,5 +1,7 @@
 package com.example.web.controller;
 
+import java.util.HashMap;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +27,6 @@ public class UserController {
 		return new LoginForm();
 	}
 	
-	
 	// loginページに遷移
 	@RequestMapping("/login")
 	public String loginPage(@ModelAttribute("loginForm")LoginForm form) {
@@ -43,6 +44,12 @@ public class UserController {
 			if (user.getPasswd().equals(form.getPasswd())) {
 				// loginに成功したユーザ情報をsessionに保存
 				session.setAttribute("user", user);
+				// user　cart 生成
+				HashMap<String, Integer> map = new HashMap<>();
+				if (session.getAttribute("map") != null) {
+					map = (HashMap<String, Integer>) session.getAttribute("map");
+				}
+				session.setAttribute("map", map);
 			}else {
 				// パスワードが間違っている場合error追加
 				result.reject("error.user.login.pw.wrong");
@@ -90,8 +97,10 @@ public class UserController {
 		// errorがある場合はlogin画面に戻す
 		if (result.hasErrors()) {return "register";}
 		
+		// DBにユーザ登録
 		service.insertUser(form);
 		
+		// login画面に遷移
 		return "redirect:/login?userId="+form.getUserId();
 	}
 	
