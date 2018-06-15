@@ -4,4 +4,27 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.persistence.OrderMapper">
+
+	<resultMap type="com.example.domain.Product" id="productList">
+			<result property="id" column="id"/>
+			<result property="categoryId" column="category_id"/>
+			<result property="category" column="category"/>
+			<result property="name" column="name"/>
+			<result property="price" column="price"/>
+			<result property="stockQuantity" column="stock_quantity"/>
+			<result property="image1" column="image1"/>
+			<result property="image2" column="image2"/>
+			<result property="detail" column="detail"/>
+	</resultMap>
+
+	<select id="getPnames" resultMap="productList" >
+		SELECT * FROM shop_product
+		<where>
+			id IN
+			<foreach collection="array" item="key" index="i" separator="," open="(" close=")">
+				#{key}
+			</foreach>
+		</where>
+	</select>
+
 </mapper>

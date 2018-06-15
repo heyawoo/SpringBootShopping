@@ -4,4 +4,14 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.persistence.UserMapper">
+
+<select id="loginCheck" resultType="com.example.domain.User">
+	SELECT * FROM shop_user WHERE user_id = #{userId}
+</select>
+
+<insert id="insertUser">
+	INSERT INTO shop_user(user_id, passwd, name, address, tel, email, inp_date) 
+	VALUES (#{userId}, #{passwd}, #{name}, #{address}, #{tel}, #{email}, CURDATE())
+</insert>
+
 </mapper>
