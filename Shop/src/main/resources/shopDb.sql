@@ -130,14 +130,15 @@ ORDER BY p.inp_date, p.id DESC
 LIMIT 6;
 
 -- list
-SELECT p.id, c.name as category, p.name, p.price, IFNULL(p.stock_quantity - d.order_quantity, p.stock_quantity) AS stock_quantity, p.image1, p.image2
+SELECT p.id as id, p.category_id, c.name as category, p.name as name, p.price as price, IFNULL(p.stock_quantity - d.order_quantity, p.stock_quantity) AS stock_quantity, p.image1 as image1, p.image2 as image2, p.detail as detail
 FROM shop_product p
 LEFT JOIN shop_order_detail d
 ON p.id = d.product_id
 JOIN shop_category c
 On p.category_id = c.id
 WHERE 
-
+p.name LIKE '%a%'
+AND p.category_id = 1
 
 -- paging
 SELECT COUNT(*) totalcount 

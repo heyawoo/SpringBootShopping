@@ -60,6 +60,10 @@
 		</where>
 		ORDER BY #{sort} ASC
 	</select>
+	
+	<select id="getTotalCount" resultType="Integer">
+		SELECT COUNT(*) FROM shop_product
+	</select>
 
 
 </mapper>

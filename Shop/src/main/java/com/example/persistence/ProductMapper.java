@@ -12,4 +12,6 @@ public interface ProductMapper {
 	public Product getProduct(String id);
 
 	public List<Product> getList(SearchForm option);
+	
+	public int getTotalCount();
 }

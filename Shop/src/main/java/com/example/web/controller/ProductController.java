@@ -27,7 +27,9 @@ public class ProductController {
 	@RequestMapping("/list")
 	public String listPage(@ModelAttribute("option")SearchForm option, Model model) {
 		
+		// DBから検索条件に該当するproductのlist取得
 		List<Product> list = service.search(option);
+		// HTMLページへ伝達
 		model.addAttribute("list", list);
 		
 		return "list";
@@ -37,7 +39,9 @@ public class ProductController {
 	@RequestMapping(value="/detail", params="id")
 	public String detailPage(@Param("id")int id, Model model) {
 		
+		// 渡されたidを利用してDBから
 		Product product = service.productDetail(id+"");
+		// HTMLページへ伝達
 		model.addAttribute("product", product);
 		
 		return "productDetail";
