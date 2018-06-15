@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.example.domain.User;
 import com.example.service.UserService;
 import com.example.web.form.LoginForm;
+import com.example.web.form.RegisterForm;
 
 @Controller
 public class UserController {
@@ -60,8 +61,38 @@ public class UserController {
 	
 	// registerページに遷移
 	@RequestMapping("/register")
-	public String registerPage() {
+	public String registerPage(@ModelAttribute("registerForm")RegisterForm form) {
 		return "register";
+	}
+
+	// registerページに遷移
+	@RequestMapping("/registerCheck")
+	public String registerCheck(@Validated @ModelAttribute("registerForm")RegisterForm form, BindingResult result) {
+		
+		// IDが入力された場合
+		if (result.getFieldError("userId") == null) {
+			// IDの重複チェック
+			Boolean idcheck = service.idCheck(form.getUserId());
+			// 重複エラー
+			if (!idcheck) {
+				result.rejectValue("userId", "error.user.register.id.exist");
+			}
+		}
+		
+		// パスワードが入力された場合
+		if (result.getFieldError("passwd") == null) {
+			// passwordエラー処理
+			if (form.getPasswd2()==null || !form.getPasswd().equals(form.getPasswd2())) {
+				result.rejectValue("passwd2", "error.user.register.pw.unmatch");
+			}
+		}
+		
+		// errorがある場合はlogin画面に戻す
+		if (result.hasErrors()) {return "register";}
+		
+		service.insertUser(form);
+		
+		return "redirect:/login?userId="+form.getUserId();
 	}
 	
 	// logout
