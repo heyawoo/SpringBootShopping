@@ -29,3 +29,6 @@ public class ShopApplication {
         return sessionFactory.getObject();
     }
 }
+
+
+// main
